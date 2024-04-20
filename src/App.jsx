@@ -34,11 +34,6 @@ const App = () => {
           component={InputFormPage}
           options={{title: 'OTL'}}
         />
-        <Stack.Screen
-          name="InputFormPage2"
-          component={InputFormPage}
-          options={{title: 'Device Intelligence'}}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );

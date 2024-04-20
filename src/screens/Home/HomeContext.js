@@ -15,21 +15,16 @@ const initialIntent = () => {
       .then(response => response.json())
       .then(json => {
         if (json.numOfPages >= 1) {
-          navigation.navigate('InputFormPage', {
+          navigation.replace('InputFormPage', {
             payLoad: json,
+            pageIndex: 0,
           });
         }
       });
   };
 };
-const navigateToDevice = () => {
-  return navigation => {
-    navigation.navigate('DeviceScreen');
-  };
-};
-
 export const {Context, Provider} = createDataContext(
   homeReducer,
-  {initialIntent: initialIntent, navigateToDevice},
+  {initialIntent: initialIntent},
   [],
 );
