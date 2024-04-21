@@ -26,7 +26,7 @@ const updateFormData = dispatch => {
   };
 };
 
-const goToNextPage = dispatch => {
+const goToNextPage = () => {
   return (currentPageIndex,payload,navigation) => {
     navigation.push('InputFormPage', {
       payLoad: payload,
@@ -35,8 +35,24 @@ const goToNextPage = dispatch => {
   };
 };
 
+const submitData = () => {
+  return (formData) => {
+    fetch(
+      'https://jkq5jyvbsb.execute-api.ap-south-1.amazonaws.com/default/landeed_submit_data',
+      {
+        method: 'POST',
+        body:JSON.stringify(formData)
+      },
+    )
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+    });
+  };
+}
+
 export const {Context, Provider} = createDataContext(
   InputFormPageReducer,
-  {updateFormData,goToNextPage},
+  {updateFormData,goToNextPage,submitData},
   {formData: []},
 );

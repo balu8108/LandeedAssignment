@@ -1,11 +1,11 @@
-import React, {JSX, useContext} from 'react';
+import React, {useContext} from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {Context as InputFormPageContext} from './InputFormPageContext';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Dropdown } from 'react-native-element-dropdown';
 
 const InputFormPageScreen = () => {
-  const {updateFormData, goToNextPage} =
+  const {state,updateFormData, goToNextPage, submitData} =
     useContext(InputFormPageContext);
   const {payLoad, pageIndex} = useRoute().params;
   console.log(payLoad)
@@ -78,7 +78,9 @@ const InputFormPageScreen = () => {
         goToNextPage(pageIndex,payLoad,navigation)
       } title="Next"/>)
     } else {
-      block.push(<Button title="Submit"/>)
+      block.push(<Button onPress={()=>
+        submitData(state.formData)
+      } title="Submit"/>)
     }
 
     return block;
